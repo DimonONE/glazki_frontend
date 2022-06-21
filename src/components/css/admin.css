@@ -1,0 +1,227 @@
+a {
+    color: #6101d1;
+    display:inline-block;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+h2 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display:inline-block;
+    margin: 40px 8px 10px 8px;
+    color: #cccccc;
+}
+
+
+
+/* STRUCTURE */
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+}
+
+#formContent {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+#formFooter {
+    background-color: #f6f6f6;
+    border-top: 1px solid #dce8f1;
+    padding: 25px;
+    text-align: center;
+    -webkit-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+}
+
+
+
+/* TABS */
+
+h2.inactive {
+    color: #cccccc;
+}
+
+
+
+/* FORM TYPOGRAPHY*/
+
+input[type=button], input[type=submit], input[type=reset]  {
+    background-color: #6101d1;
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 30px 20px 40px 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+    background-color: #8c29ff;
+}
+
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+    -moz-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
+}
+
+input#login {
+    margin: 30px 5px 5px 5px;
+}
+
+input[type=text], input[type=password], .admin-content .input-field textarea, select {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid #f6f6f6;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.admin-content .input-field textarea, .admin-content .input-field input {
+    transition: none;
+}
+
+input[type=text]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #6101d1;
+}
+
+input[type=text]:placeholder {
+    color: #cccccc;
+}
+
+
+/* Simple CSS3 Fade-in Animation */
+.underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #6101d1;
+    content: "";
+    transition: width 0.2s;
+}
+
+.underlineHover:hover {
+    text-decoration: none;
+    color: #6101d1;
+}
+
+.underlineHover:hover:after{
+    width: 100%;
+}
+
+
+
+/* OTHERS */
+
+*:focus {
+    outline: none;
+}
+
+#icon {
+    width:60%;
+}
+
+.admin-dashboard {
+    width: calc(100% - 250px);
+    float: right;
+}
+
+.admin-content {
+    padding: 40px;
+}
+
+.admin-content .input-field {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.logo-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.login-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-btn {
+    padding: 10px 0 30px 0;
+}
+
+.logo-form .input-field {
+    margin: 0;
+}
+
+.logo-form input {
+    margin-left: 20px;
+}
+
+.logo-form .file-preview {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.logo-form .file-preview img {
+    width: 160px;
+    height: 130px;
+    margin: auto;
+}

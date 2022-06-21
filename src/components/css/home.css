@@ -1,0 +1,58 @@
+.about-btn {
+    font-family: "Tahoma", Sans-serif;
+    font-size: 13px;
+    fill: #8040C0;
+    color: #8040C0;
+    background-color: #FFFFFF;
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: #8040C0;
+    border-radius: 8px 8px 8px 8px;
+    padding: 19px 19px 19px 19px;
+}
+
+.benefits-item_bg {
+    min-height: 260px;
+    margin-bottom: 20px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    flex-direction: column;
+    color: white;
+}
+
+.benefits-item_icon {
+    color: white;
+    font-size: 45px;
+    margin-bottom: 25px;
+}
+
+.benefits-item_description {
+    font-size: 13px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #000000a1;
+    border-radius: 5px;
+    padding: 10px;
+    line-height: 16px;
+    display: none;
+}
+
+.benefits-item_bg:hover .benefits-item_description {
+    display: block;
+    cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+    .main-block {
+        max-width: 95%;
+    }
+}
