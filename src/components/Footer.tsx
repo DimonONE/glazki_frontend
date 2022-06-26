@@ -1,7 +1,7 @@
 import React from "react";
 // @ts-ignore
 import logoMini from "../static/images/logo-mini.png";
-import "./css/footer.css";
+import "./css/footer.scss";
 import "../static/font-awesome/css/all.css";
 
 const Footer = () => {

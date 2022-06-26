@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ItemService from "../../services/item.service";
-import "../css/item.css";
+import "../css/item.scss";
 import * as config from "../../config/config.dev";
 
 interface State {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./css/home.css";
+import "./css/home.scss";
 // @ts-ignore
 import mainImg from "../static/images/main-image.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

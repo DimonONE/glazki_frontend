@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../css/admin.css";
+import "../css/admin.scss";
 import { Editor } from "@tinymce/tinymce-react";
 import ItemService from "../../services/item.service";
 

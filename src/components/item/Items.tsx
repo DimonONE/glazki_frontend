@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemList, { ItemType } from "./ItemList";
 import ItemService from "../../services/item.service";
-import "../css/item.css";
+import "../css/item.scss";
 import PageService from "../../services/page.service";
 import AuthService from "../../services/auth.service";
 import ViewsService from "../../services/views.service";

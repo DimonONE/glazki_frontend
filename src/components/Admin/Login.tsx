@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/admin.css";
+import "../css/admin.scss";
 import AuthService from "../../services/auth.service";
 import LoginButton from "../common/LoginButton";
 

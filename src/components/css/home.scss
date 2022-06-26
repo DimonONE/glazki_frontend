@@ -9,6 +9,13 @@
     border-color: #8040C0;
     border-radius: 8px 8px 8px 8px;
     padding: 19px 19px 19px 19px;
+    text-decoration: none !important;
+
+    &:hover {
+        background-color: #8040C0;
+        color: #FFFFFF;
+        transition: background-color 0.3s ease-out;
+    }
 }
 
 .benefits-item_bg {

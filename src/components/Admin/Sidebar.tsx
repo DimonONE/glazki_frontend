@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../css/sidebar.css";
+import "../css/sidebar.scss";
 // @ts-ignore
 import logo from "../../static/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

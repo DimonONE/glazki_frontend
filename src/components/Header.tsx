@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import DropdownButton from "./common/DropdownButton";
-import "./css/header.css";
+import "./css/header.scss";
 // @ts-ignore
 import logo from "../static/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

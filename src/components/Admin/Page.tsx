@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/admin.css";
+import "../css/admin.scss";
 import PageService from "../../services/page.service";
 import Select from "react-select";
 

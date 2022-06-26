@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../css/admin.css";
+import "../css/admin.scss";
 import AdminSidebar from "./Sidebar";
 import ItemService from "../../services/item.service";
 import ItemList from "../item/ItemList";
