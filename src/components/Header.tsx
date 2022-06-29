@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import DropdownButton from "./common/DropdownButton";
 import "./css/header.scss";
@@ -12,22 +12,19 @@ import {
   faHeart,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import PageService from "../services/page.service";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-
-interface Page {
-  name: string;
-  type: string;
-}
+import { useGlobalState } from "../Store/store";
+import { PageT } from "../types/Pages";
 
 interface State {
   showDropdown: boolean;
   isShowSearch: boolean;
-  pagesMobile: Page[];
-  pages: Page[];
+  pagesMobile: PageT[];
+  pages: PageT[];
 }
 
 const Header: React.FC = () => {
+  const [pages] = useGlobalState("pages");
   const [state, setState] = useState<State>({
     showDropdown: false,
     isShowSearch: false,
@@ -43,29 +40,10 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    (async function () {
-      let pages: any = [];
-      PageService.getPages().then((res: any) => {
-        for (let i = 1; i < res.data.length; i += 2) {
-          pages.push(
-            <div className="dropdown-block">
-              <DropdownButton
-                name={`${res.data[i - 1].name}`}
-                type={`${res.data[i - 1].type}`}
-              />
-              <DropdownButton
-                name={`${res.data[i].name}`}
-                type={`${res.data[i].type}`}
-              />
-            </div>
-          );
-          if (i !== res.data.length)
-            pages.push(<div className="dropdown-separator"></div>);
-        }
-        setState((prev) => ({ ...prev, pages: pages, pagesMobile: res.data }));
-      });
-    })();
-  }, []);
+    if (pages) {
+      setState((prev) => ({ ...prev, pages, pagesMobile: pages }));
+    }
+  }, [pages]);
 
   if (window.location.pathname.match(/admin/)) {
     return null;
@@ -140,8 +118,22 @@ const Header: React.FC = () => {
           </div>
         </nav>
 
-        {state.showDropdown && state.pages ? (
-          <div className="col dropdown">{/*{state.pages}*/}</div>
+        {state.showDropdown ? (
+          <div
+            className="col dropdown"
+            onMouseLeave={() =>
+              setState((prev) => ({ ...prev, showDropdown: false }))
+            }
+          >
+            {state.pages.map((element) => (
+              <div key={element.type} className="dropdown-block">
+                <DropdownButton
+                  name={`${element.name}`}
+                  type={`${element.type}`}
+                />
+              </div>
+            ))}
+          </div>
         ) : null}
 
         {state.showDropdown && state.pages ? (
@@ -149,7 +141,13 @@ const Header: React.FC = () => {
             {state.pagesMobile.map((page) => {
               return (
                 <li>
-                  <DropdownButton name={`${page.name}`} type={`${page.type}`} />
+                  <DropdownButton
+                    name={`${page.name}`}
+                    type={`${page.type}`}
+                    click={() =>
+                      setState((prev) => ({ ...prev, showDropdown: false }))
+                    }
+                  />
                 </li>
               );
             })}

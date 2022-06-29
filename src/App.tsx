@@ -1,15 +1,14 @@
 import React from "react";
-import "./App.css";
 import { RouterCustom } from "./route";
+import { Initialization } from "./components/Initialization";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <RouterCustom />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Initialization />
+      <RouterCustom />
+    </div>
+  );
+};
 
 export default App;
