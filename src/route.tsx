@@ -11,57 +11,50 @@ import {
   AdminLogin,
   AdminDashboard,
 } from "./components";
-import React from "react";
+import React, { useMemo } from "react";
 import PageService from "./services/page.service";
+import { useGlobalState } from "./Store/store";
 
 interface State {
   linkPages: { type: string }[];
 }
 
-export class RouterCustom extends React.Component {
-  state: State = {
-    linkPages: [],
-  };
-  constructor(props: any) {
-    super(props);
-  }
+export const RouterCustom: React.FC = () => {
+  const [pages] = useGlobalState("pages");
+  const linkPages = useMemo(
+    () => (pages ? pages.map((page) => page.type) : []),
+    [pages]
+  );
 
-  async componentDidMount() {
-    const res = await PageService.getPages();
-    console.log("res", res);
-  }
-
-  render() {
-    return (
-      <Router>
-        <Header />
-        <div
-          className={
-            "no-padding-lr" +
-            (window.location.pathname.match(/admin/)
-              ? " admin-container"
-              : " main-block container")
-          }
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-
-            <Route path="/contact" element={<Contact />} />
-            {this.state.linkPages.map((page) => (
-              <Route
-                key={page.type}
-                path={`/${page.type}`}
-                element={<Items type={page.type} />}
-              />
-            ))}
-            <Route path="/item/:id" element={<Item />} />
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          </Routes>
-        </div>
-        <Footer />
-      </Router>
-    );
-  }
-}
+  console.log("linkPages", linkPages);
+  return (
+    <Router>
+      <Header />
+      <div
+        className={
+          "no-padding-lr" +
+          (window.location.pathname.match(/admin/)
+            ? " admin-container"
+            : " main-block container")
+        }
+      >
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          {linkPages.map((type) => (
+            <Route
+              key={type}
+              path={`/${type}`}
+              element={<Items type={type} />}
+            />
+          ))}
+          <Route path="/item/:id" element={<Item />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </div>
+      <Footer />
+    </Router>
+  );
+};
