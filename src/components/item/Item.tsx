@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ItemService from "../../services/item.service";
 import "../css/item.scss";
 import * as config from "../../config/config.dev";
+import Categories from "../categories/Categories";
+import Settings from "../common/Settings";
 
 interface State {
   item: {
@@ -37,27 +39,35 @@ const Item: React.FC = (props) => {
 
   return (
     <div className="item-wrapper">
-      <div className="item-header">
-        <h1>{state.item.name}</h1>
-
-        <div className="col">
-          <div className="col-sm-12 col-md-4 item-header-logo-wrapper">
-            <span
-              className="item-header-logo"
-              style={{
-                backgroundImage: `url(${config.api}/api/image/${state.item.logo})`,
-              }}
-            ></span>
+      <div className="d-flex">
+        <div className="item-header col-sm-12 col-md-9">
+          <h1>{state.item.name}</h1>
+          <div className="col">
+            <div className="col-sm-12 col-md-4 item-header-logo-wrapper">
+              <span
+                className="item-header-logo"
+                style={{
+                  backgroundImage: `url(${config.api}/api/image/${state.item.logo})`,
+                }}
+              />
+            </div>
+            <div className="col-sm-12 col-md-12 item-header-description">
+              <p>{state.item.description}</p>
+            </div>
+            <div className="col-sm-12 item-header-actions" />
           </div>
-          <div className="col-sm-12 col-md-12 item-header-description">
-            <p>{state.item.description}</p>
-          </div>
-          <div className="col-sm-12 item-header-actions"></div>
+        </div>
+        <div className="item-wrapper__categories col-sm-0 col-md-4 col-lg-3">
+          <Categories />
         </div>
       </div>
+
       <div className="item-content">
-        <div className="col-sm-12 col-md-9">
-          <p>Текст сказки</p>
+        <div className="item-content__wrapper col-sm-12 col-md-9">
+          <div className="d-flex">
+            <p className="item-content__title">Текст сказки</p>
+            <Settings />
+          </div>
           <div
             className="col"
             dangerouslySetInnerHTML={{ __html: state.item.content }}

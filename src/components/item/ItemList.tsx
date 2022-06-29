@@ -9,6 +9,7 @@ import {
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { Player } from "../Player/Player";
 
 export interface ItemType {
   _id: string | number;
@@ -52,7 +53,7 @@ const ItemList: React.FC<IProps> = (props) => {
                   backgroundImage: `url(${config.api}/api/image/${item.logo})`,
                 }}
               >
-                {/*<img src={"http://localhost:4000/api/image/" + item.logo} alt=""/>*/}
+                <img src={config.api + item.logo} alt="None" />
               </div>
             </div>
             <div className="item-body">
@@ -86,6 +87,7 @@ const ItemList: React.FC<IProps> = (props) => {
                 <span>Автор:</span>
                 <span>{item.author}</span>
               </div>
+              <Player />
             </div>
           </div>
         );

@@ -128,7 +128,7 @@ const Home: React.FC = () => {
       <div className="row align-items-center my-5 benefits">
         {benefits.map((item, index) => {
           return (
-            <div className="col-lg-3 benefits-item">
+            <Link to="ss" className="col-lg-3 benefits-item">
               <div
                 className="col-lg-12 benefits-item_bg"
                 style={{ backgroundImage: `url(${item.url})` }}
@@ -141,7 +141,7 @@ const Home: React.FC = () => {
                 </div>
                 <div className="benefits-item_description">{item.text}</div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

@@ -1,0 +1,38 @@
+@import "../../styles/mixin";
+
+.settings-page {
+  width: 265px;
+  color: $text-color;
+
+  &__title {
+    font-weight: 700;
+    font-size: 15px;
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+
+  &__content {
+    padding: 9px 0;
+    .setting-name {
+      font-size: 13px;
+    }
+
+    .setting-wrap {
+      margin: 0 5px;
+      padding-bottom: 4px;
+    }
+
+    .setting {
+        display: flex;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & .active {
+      border-bottom: 1px solid $text-color;
+    }
+  }
+}

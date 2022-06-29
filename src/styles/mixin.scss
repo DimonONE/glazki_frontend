@@ -3,6 +3,8 @@ $lg: 960px;
 $md: 720px;
 $sm: 540px;
 
+$text-color: #3e3e3e;
+
 @mixin mobile {
   @media (max-width: $sm) {
     @content

@@ -9,12 +9,17 @@ const Categories = () => {
     () => Array.from({ length: 5 }, (index) => index),
     []
   );
+
+  const selectCategory = () => {
+    // setFilterByCategory()
+  };
+
   return (
     <div className="categories">
       <h2 className="title">КАТЕГОРИИ</h2>
       <ul className="list">
         {categories.map((item, index) => (
-          <li className="list-item" key={index}>
+          <li className="list-item" key={index} onClick={selectCategory}>
             КАТЕГОРИЯ
           </li>
         ))}

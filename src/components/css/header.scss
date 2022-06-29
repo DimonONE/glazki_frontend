@@ -101,7 +101,7 @@
     -webkit-box-shadow: 0 2px 7px 1px rgb(0 0 0 / 7%);
     box-shadow: 0 2px 7px 1px rgb(0 0 0 / 7%);
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 25% 25% 25% 25%;
 }
 
 .header .dropdown .dropdown-block {
@@ -149,7 +149,6 @@
         }
     }
 }
-
 
 @media (max-width: 1200px) {
     .header .container {
