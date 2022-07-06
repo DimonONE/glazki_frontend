@@ -5,6 +5,8 @@ $sm: 540px;
 
 $text-color: #3e3e3e;
 
+$background: 'red';
+
 @mixin mobile {
   @media (max-width: $sm) {
     @content

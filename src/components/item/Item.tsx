@@ -4,6 +4,8 @@ import "../css/item.scss";
 import * as config from "../../config/config.dev";
 import Categories from "../categories/Categories";
 import Settings from "../common/Settings";
+import { makeStyles, Theme } from "@material-ui/core";
+import { useGlobalState } from "../../Store/store";
 
 interface State {
   item: {
@@ -15,6 +17,7 @@ interface State {
 }
 
 const Item: React.FC = (props) => {
+  const [settingPage] = useGlobalState("settingPage");
   const [state, setState] = useState<State>({
     item: {
       name: "",
@@ -23,6 +26,19 @@ const Item: React.FC = (props) => {
       content: undefined,
     },
   });
+
+  const useStyles = makeStyles((theme: Theme) => ({
+    root: {
+      fontSize: settingPage.fontSize.size || "",
+      color: settingPage.fontColor.color || "",
+    },
+    p: {
+      fontSize: settingPage.fontSize.size || "",
+      color: settingPage.fontColor.color || "",
+    },
+  }));
+
+  const classes = useStyles();
 
   useEffect(() => {
     (async function () {
@@ -38,7 +54,7 @@ const Item: React.FC = (props) => {
   }, []);
 
   return (
-    <div className="item-wrapper">
+    <div className={`item-wrapper ${classes.root}`}>
       <div className="d-flex">
         <div className="item-header col-sm-12 col-md-9">
           <h1>{state.item.name}</h1>
@@ -65,11 +81,11 @@ const Item: React.FC = (props) => {
       <div className="item-content">
         <div className="item-content__wrapper col-sm-12 col-md-9">
           <div className="d-flex">
-            <p className="item-content__title">Текст сказки</p>
+            <p className={`item-content__title ${classes.p}`}>Текст сказки</p>
             <Settings />
           </div>
           <div
-            className="col"
+            className={`col ${classes.p}`}
             dangerouslySetInnerHTML={{ __html: state.item.content }}
           />
         </div>

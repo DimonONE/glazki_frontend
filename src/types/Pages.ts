@@ -5,16 +5,16 @@ export interface PageT {
   description: string;
 }
 
-interface SettingColor {
+export interface SettingColor {
   id: string | number;
   color: string;
 }
 
-export interface SettingPageT {
+export interface StoreSettingPageT {
   fontSize: {
     id: string | number;
     size: string;
-  }[];
-  backgrounds: SettingColor[];
-  fontColor: SettingColor[];
+  };
+  background: SettingColor;
+  fontColor: SettingColor;
 }

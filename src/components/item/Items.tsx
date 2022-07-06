@@ -6,6 +6,8 @@ import PageService from "../../services/page.service";
 import AuthService from "../../services/auth.service";
 import ViewsService from "../../services/views.service";
 import Categories from "../categories/Categories";
+import { useGlobalState } from "../../Store/store";
+import { makeStyles, Theme } from "@material-ui/core";
 
 interface State {
   items: ItemType[];
