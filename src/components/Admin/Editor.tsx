@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/admin.scss";
 import { Editor } from "@tinymce/tinymce-react";
 import ItemService from "../../services/item.service";
+import File from "./File";
 
 interface Item {
   _id: string | number;
@@ -160,6 +161,12 @@ const EditorComponent: React.FC<IProps> = (props) => {
         </div>
       </form>
 
+        <div className="input-field">
+            <label htmlFor="type">Аудио:</label>
+            {/*// @ts-ignore*/}
+            <File item={state.item} type={props.type} />
+        </div>
+
       <br />
       <h4>Контент</h4>
       <Editor
@@ -183,6 +190,10 @@ const EditorComponent: React.FC<IProps> = (props) => {
           autosave_restore_when_empty: false,
           autosave_retention: "2m",
           image_advtab: true,
+          block_unsupported_drop: false,
+          media_live_embeds: true,
+          file_picker_types: "file image media",
+          media_alt_source: true,
           link_list: [
             { title: "My page 1", value: "https://www.tiny.cloud" },
             { title: "My page 2", value: "http://www.moxiecode.com" },

@@ -47,7 +47,7 @@ const AdminDashboard: React.FC<IProps> = (props) => {
       isCreatePage: false,
     }));
 
-    ItemService.getItems(e.target.dataset.type).then((res: any) => {
+    ItemService.getItems(e.target.getAttribute('datatype')).then((res: any) => {
       setState((prev) => ({
         ...prev,
         items: res.data,

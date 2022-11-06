@@ -47,10 +47,11 @@
     text-decoration: none;
     margin-right: 15px;
     font-size: 15px;
-    display: inline-block;
     padding: 5px;
     border: solid 1px transparent;
     transition: all 0.2s ease-in-out;
+    align-items: center;
+    display: flex;
 }
 
 .header .nav-link.nav-hover:hover {
