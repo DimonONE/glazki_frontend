@@ -45,7 +45,7 @@ const AdminSidebar: React.FC<IProps> = (props) => {
                   href="#"
                   onClick={props.changeType}
                   datatype={page.type}
-                  // dataName={page.name}
+                  data-name={page.name}
                 >
                   {page.name}
                 </a>

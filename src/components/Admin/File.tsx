@@ -27,12 +27,18 @@ const FileComponent: React.FC<IProps> = (props) => {
             if (a) {
                 a.pause();
                 a = null;
-                state.setButtonName("Play");
+                setState((prev) => ({
+                    ...prev,
+                    buttonName: "Play"
+                }));
             }
             if (state.audio) {
                 a = new Audio(state.audio);
                 a.onended = () => {
-                    state.setButtonName("Play");
+                    setState((prev) => ({
+                        ...prev,
+                        buttonName: "Play"
+                    }));
                 };
             }
         })();
@@ -41,10 +47,16 @@ const FileComponent: React.FC<IProps> = (props) => {
     const handleClick = () => {
         if (state.buttonName === "Play") {
             a.play();
-            state.setButtonName("Pause");
+            setState((prev) => ({
+                ...prev,
+                buttonName: "Pause"
+            }));
         } else {
             a.pause();
-            state.setButtonName("Play");
+            setState((prev) => ({
+                ...prev,
+                buttonName: "Play"
+            }));
         }
     };
 
@@ -59,8 +71,8 @@ const FileComponent: React.FC<IProps> = (props) => {
     };
 
     return (
-        <div className="flex">
-            <button onClick={handleClick}>{state.buttonName}</button>
+        <div className="flex audio-component">
+            <button className="btn btn-secondary" onClick={handleClick}>{state.buttonName}</button>
             <input type="file" onChange={addFile} />
         </div>
     );

@@ -41,8 +41,8 @@ const AdminDashboard: React.FC<IProps> = (props) => {
     e.target.parentElement.className = "sidebar-active";
     setState((prev) => ({
       ...prev,
-      type: e.target.dataset.type,
-      name: e.target.dataset.name,
+      type: e.target.getAttribute('datatype'),
+      name: e.target.getAttribute('data-name'),
       isEditor: false,
       isCreatePage: false,
     }));
@@ -58,6 +58,7 @@ const AdminDashboard: React.FC<IProps> = (props) => {
     setState((prev) => ({
       ...prev,
       isEditor: true,
+      type: state.type,
       selectedItem: null,
       isCreatePage: false,
     }));

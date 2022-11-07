@@ -13,10 +13,11 @@ interface Item {
   author: string;
   time: string;
   content: any;
+  audio?: any;
 }
 
 interface IProps {
-  item: number | null;
+  item: any | null;
   type: string;
 }
 
@@ -27,9 +28,11 @@ interface State {
   items: any;
   isEmptyEditor: boolean;
   item: Item | null;
+  isShowAudio: boolean;
 }
 
 const EditorComponent: React.FC<IProps> = (props) => {
+  const audioTypes = ['audio_skazki', 'children_song'];
   const [state, setState] = useState<State>({
     editor: null,
     type: "skazki",
@@ -37,7 +40,10 @@ const EditorComponent: React.FC<IProps> = (props) => {
     items: [],
     isEmptyEditor: false,
     item: null,
+    isShowAudio: audioTypes.indexOf(props.type) >= 0
   });
+
+    // audio_skazki children_song
 
   useEffect(() => {
     (async function () {
@@ -52,29 +58,28 @@ const EditorComponent: React.FC<IProps> = (props) => {
 
   const create = () => {
     // @ts-ignore
-    // let file = document.querySelector('input[type="file"]').files[0];
-    // let item: Item | undefined = undefined;
-    // if (props.item) item = props.item;
-    // if (item) {
-    //   // item.name = document.querySelector('input[name="name"]').value;
-    //   // @ts-ignore
-    //   item.description = document.querySelector(
-    //     'textarea[name="description"]'
-    //     // @ts-ignore
-    //   ).value;
-    //   // @ts-ignore
-    //   item.author = document.querySelector('textarea[name="author"]').value;
-    //   item.type = props.type;
-    //   item.content = state.editor.getContent();
-    //   item.logo = file ? file.name : item?.logo;
-    // }
-    //
-    // if (file) ItemService.uploadLogo(file);
-    // if (props.item) {
-    //   ItemService.updateItem(item, props.item._id);
-    // } else {
-    //   ItemService.createItem(item);
-    // }
+    let file = document.querySelector('.logo-form input[type="file"]').files[0];
+    // @ts-ignore
+    let audio = document.querySelector('.audio-field input[type="file"]').files[0];
+    let item: any;
+    if (props.item) item = props.item;
+      // @ts-ignore
+      item.name = document.querySelector('input[name="name"]').value;
+      // @ts-ignore
+      item.description = document.querySelector('textarea[name="description"]').value;
+      // @ts-ignore
+      item.author = document.querySelector('textarea[name="author"]').value;
+      item.type = props.type;
+      item.content = state.editor.getContent();
+      item.logo = file ? file.name : item?.logo;
+
+    if (file) ItemService.uploadLogo(file);
+    if (audio) ItemService.uploadLogo(audio);
+    if (props.item) {
+        ItemService.updateItem(item, props.item._id);
+    } else {
+        ItemService.createItem(item);
+    }
   };
 
   const changeType = (e: any) => {
@@ -161,11 +166,11 @@ const EditorComponent: React.FC<IProps> = (props) => {
         </div>
       </form>
 
-        <div className="input-field">
-            <label htmlFor="type">Аудио:</label>
-            {/*// @ts-ignore*/}
-            <File item={state.item} type={props.type} />
-        </div>
+      {state.isShowAudio ? <div className="audio-field">
+          <label htmlFor="type">Аудио:</label>
+          {/*// @ts-ignore*/}
+          <File item={state.item} type={props.type} />
+      </div> : null}
 
       <br />
       <h4>Контент</h4>
@@ -267,7 +272,7 @@ const EditorComponent: React.FC<IProps> = (props) => {
           },
         }}
       />
-      <button className="btn btn-light" onClick={create}>
+      <button className="btn btn-primary" onClick={create}>
         Сохранить
       </button>
     </div>

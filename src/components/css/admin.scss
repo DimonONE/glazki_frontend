@@ -175,6 +175,18 @@ input[type=text]:placeholder {
 
 .admin-content {
     padding: 40px;
+
+    .audio-field {
+        display: flex;
+
+        .audio-component {
+            margin-left: 5px;
+
+            button {
+                margin-right: 10px;
+            }
+        }
+    }
 }
 
 .admin-content .input-field {
