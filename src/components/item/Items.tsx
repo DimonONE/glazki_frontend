@@ -8,6 +8,7 @@ import ViewsService from "../../services/views.service";
 import Categories from "../categories/Categories";
 import { useGlobalState } from "../../Store/store";
 import { makeStyles, Theme } from "@material-ui/core";
+import CategoryService from "../../services/category.service";
 
 interface State {
   items: ItemType[];
@@ -15,6 +16,7 @@ interface State {
     name: string;
     description: string;
   };
+  categories: Object[];
 }
 
 interface IProps {
@@ -28,6 +30,7 @@ const Items: React.FC<IProps> = ({ type }) => {
       name: "",
       description: "",
     },
+    categories: []
   });
 
   const loadData = (type: string) => {
@@ -37,6 +40,10 @@ const Items: React.FC<IProps> = ({ type }) => {
 
     ItemService.getItems(type).then((res: any) => {
       setState((prev) => ({ ...prev, items: res.data.length ? res.data : [] }));
+    });
+
+    CategoryService.getCategoriesByType(type).then((res: any) => {
+      setState((prev) => ({ ...prev, categories: res.data.length ? res.data : [] }));
     });
   };
 
@@ -58,7 +65,7 @@ const Items: React.FC<IProps> = ({ type }) => {
         {state.items.length ? <ItemList items={state.items} /> : null}
       </div>
       <div className="col-sm-0 col-md-4 col-lg-3">
-        <Categories />
+        <Categories data={state.categories} />
       </div>
     </div>
   );

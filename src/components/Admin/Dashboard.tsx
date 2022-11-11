@@ -5,6 +5,7 @@ import ItemService from "../../services/item.service";
 import ItemList from "../item/ItemList";
 import EditorComponent from "./Editor";
 import PageComponent from "./Page";
+import CategoryComponent from "./Category";
 import PageService from "../../services/page.service";
 
 type IProps = {};
@@ -17,6 +18,7 @@ interface State {
   pages: [];
   isEditor: boolean;
   isCreatePage: boolean;
+  isCreateCategory: boolean;
   selectedItem: number | null;
   selectedPage: number | null;
 }
@@ -30,6 +32,7 @@ const AdminDashboard: React.FC<IProps> = (props) => {
     pages: [],
     isEditor: false,
     isCreatePage: false,
+    isCreateCategory: false,
     selectedItem: null,
     selectedPage: null,
   });
@@ -45,8 +48,10 @@ const AdminDashboard: React.FC<IProps> = (props) => {
       name: e.target.getAttribute('data-name'),
       isEditor: false,
       isCreatePage: false,
+      isCreateCategory: false
     }));
 
+    console.log(e.target.getAttribute('datatype'));
     ItemService.getItems(e.target.getAttribute('datatype')).then((res: any) => {
       setState((prev) => ({
         ...prev,
@@ -61,6 +66,7 @@ const AdminDashboard: React.FC<IProps> = (props) => {
       type: state.type,
       selectedItem: null,
       isCreatePage: false,
+      isCreateCategory: false
     }));
   };
 
@@ -77,6 +83,7 @@ const AdminDashboard: React.FC<IProps> = (props) => {
       ...prev,
       isCreatePage: true,
       isEditor: false,
+      isCreateCategory: false
     }));
   };
 
@@ -86,6 +93,16 @@ const AdminDashboard: React.FC<IProps> = (props) => {
       selectedPage: page,
       isCreatePage: true,
       isEditor: false,
+      isCreateCategory: false
+    }));
+  };
+
+  const createCategory = () => {
+    setState((prev) => ({
+      ...prev,
+      isCreatePage: false,
+      isEditor: false,
+      isCreateCategory: true
     }));
   };
 
@@ -123,14 +140,21 @@ const AdminDashboard: React.FC<IProps> = (props) => {
           <div className="col-sm-9">
             <h1>{state.name}</h1>
           </div>
-          <div className="col-sm-3">
-            <button onClick={createItem} className="btn btn-light">
-              Создать
-            </button>
+          <div className="col-sm-3 d-flex">
+            <div className="col-sm-4">
+              <button onClick={createItem} className="btn btn-light">
+                Создать
+              </button>
+            </div>
+            <div className="col-sm-8">
+              <button onClick={createCategory} className="btn btn-light">
+                Создать категорию
+              </button>
+            </div>
           </div>
         </div>
 
-        {state.items.length && !state.isEditor && !state.isCreatePage ? (
+        {state.items.length && !state.isEditor && !state.isCreatePage && !state.isCreateCategory ? (
           <ItemList
             items={state.items}
             admin={true}
@@ -143,6 +167,10 @@ const AdminDashboard: React.FC<IProps> = (props) => {
         {state.isCreatePage ? (
           //@ts-ignore
           <PageComponent page={state.selectedPage} />
+        ) : null}
+        {state.isCreateCategory ? (
+            //@ts-ignore
+            <CategoryComponent  item={state.selectedPage} type={state.type}/>
         ) : null}
       </div>
     </div>

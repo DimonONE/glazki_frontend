@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ItemService from "../../services/item.service";
+import CategoryService from "../../services/category.service";
 import "../css/item.scss";
 import * as config from "../../config/config.dev";
 import Categories from "../categories/Categories";
@@ -13,7 +14,10 @@ interface State {
     logo: string;
     content: any;
     description: string;
+    audio?: string;
+    type: string;
   };
+  categories: Object[];
 }
 
 const Item: React.FC = (props) => {
@@ -24,7 +28,10 @@ const Item: React.FC = (props) => {
       description: "",
       logo: "",
       content: undefined,
+      audio: "",
+      type: ""
     },
+    categories: []
   });
 
   const useStyles = makeStyles((theme: Theme) => ({
@@ -45,10 +52,13 @@ const Item: React.FC = (props) => {
       // @ts-ignore
       let id = /[^/]*$/.exec(window.location.pathname)[0];
       ItemService.getItem(id).then((res: any) => {
-        setState((prev) => ({
-          ...prev,
-          item: res.data,
-        }));
+        CategoryService.getCategoriesByType(res.data.type).then((categories: any) => {
+          setState((prev) => ({
+            ...prev,
+            item: res.data,
+            categories: categories.data
+          }));
+        });
       });
     })();
   }, []);
@@ -74,7 +84,7 @@ const Item: React.FC = (props) => {
           </div>
         </div>
         <div className="item-wrapper__categories col-sm-0 col-md-4 col-lg-3">
-          <Categories />
+          <Categories data={state.categories} />
         </div>
       </div>
 
@@ -84,6 +94,11 @@ const Item: React.FC = (props) => {
             <p className={`item-content__title ${classes.p}`}>Текст сказки</p>
             <Settings />
           </div>
+          {state.item.audio ? <div className="d-flex">
+            <audio controls>
+              <source src={config.api + `/api/image/${state.item.audio}`} />
+            </audio>
+          </div> : null}
           <div
             className={`col ${classes.p}`}
             dangerouslySetInnerHTML={{ __html: state.item.content }}

@@ -176,6 +176,17 @@ input[type=text]:placeholder {
 .admin-content {
     padding: 40px;
 
+    .category-select-block {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .category-select {
+            width: 300px;
+            margin-left: 150px;
+        }
+    }
+
     .audio-field {
         display: flex;
 

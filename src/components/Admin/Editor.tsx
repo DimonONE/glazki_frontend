@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../css/admin.scss";
 import { Editor } from "@tinymce/tinymce-react";
 import ItemService from "../../services/item.service";
+import CategoryService from "../../services/category.service";
 import File from "./File";
+import Select from "react-select";
 
 interface Item {
   _id: string | number;
@@ -29,6 +31,9 @@ interface State {
   isEmptyEditor: boolean;
   item: Item | null;
   isShowAudio: boolean;
+  defaultValue: number | string;
+  categories: any;
+  selectedCategory: string;
 }
 
 const EditorComponent: React.FC<IProps> = (props) => {
@@ -40,7 +45,10 @@ const EditorComponent: React.FC<IProps> = (props) => {
     items: [],
     isEmptyEditor: false,
     item: null,
-    isShowAudio: audioTypes.indexOf(props.type) >= 0
+    isShowAudio: audioTypes.indexOf(props.type) >= 0,
+    defaultValue: "",
+    categories: [],
+    selectedCategory: ""
   });
 
     // audio_skazki children_song
@@ -53,6 +61,20 @@ const EditorComponent: React.FC<IProps> = (props) => {
           items: res.data.length ? res.data : null,
         }));
       });
+
+      CategoryService.getCategoriesByType(props.type).then((res: any) => {
+          if (res.data.length) {
+              let categories: any = [];
+              res.data.forEach((dataItem: any) => {
+                  categories.push({label: dataItem.name, value: dataItem._id});
+              });
+              console.log(categories);
+              setState((prev) => ({
+                  ...prev,
+                  categories: categories
+              }));
+          }
+      });
     })();
   }, []);
 
@@ -60,8 +82,10 @@ const EditorComponent: React.FC<IProps> = (props) => {
     // @ts-ignore
     let file = document.querySelector('.logo-form input[type="file"]').files[0];
     // @ts-ignore
-    let audio = document.querySelector('.audio-field input[type="file"]').files[0];
-    let item: any;
+    let audio = null;
+
+    // audio = document.querySelector('.audio-field input[type="file"]').files[0];
+    let item: any = {};
     if (props.item) item = props.item;
       // @ts-ignore
       item.name = document.querySelector('input[name="name"]').value;
@@ -72,9 +96,11 @@ const EditorComponent: React.FC<IProps> = (props) => {
       item.type = props.type;
       item.content = state.editor.getContent();
       item.logo = file ? file.name : item?.logo;
+      // item.audio = audio ? audio.name : item?.audio;
+      item.categoryId = state.selectedCategory;
 
     if (file) ItemService.uploadLogo(file);
-    if (audio) ItemService.uploadLogo(audio);
+    // if (audio) ItemService.uploadLogo(audio);
     if (props.item) {
         ItemService.updateItem(item, props.item._id);
     } else {
@@ -89,6 +115,13 @@ const EditorComponent: React.FC<IProps> = (props) => {
       type: e.target.dataset.type,
       name: e.target.dataset.name,
     }));
+  };
+
+  const changeCategory = (category: any) => {
+      setState((prev) => ({
+          ...prev,
+          selectedCategory: category
+      }));
   };
 
   // componentWillReceiveProps(nextProps: any) {
@@ -138,6 +171,15 @@ const EditorComponent: React.FC<IProps> = (props) => {
             defaultValue={state.item ? state.item.time : ""}
           />
         </div>
+          <div className="category-select-block">
+              <label htmlFor="category">Категория:</label>
+              <Select
+                  className="category-select"
+                  options={state.categories}
+                  defaultValue={state.defaultValue}
+                  onChange={(category: any) => changeCategory(category.value)}
+              />
+          </div>
       </div>
 
       <form className="logo-form">
