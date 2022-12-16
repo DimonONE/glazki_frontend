@@ -4,6 +4,7 @@ import "../css/categories.scss";
 
 interface IProps {
     data: any;
+    selectCategory: any;
 }
 
 const CategoriesComponent: React.FC<IProps> = (props) => {
@@ -17,16 +18,12 @@ const CategoriesComponent: React.FC<IProps> = (props) => {
     const categories = props.data;
     console.log(categories);
 
-  const selectCategory = () => {
-    // setFilterByCategory()
-  };
-
   return (
     <div className="categories">
       <h2 className="title">КАТЕГОРИИ</h2>
       <ul className="list">
         {categories.map((item: any, index: number) => (
-          <li className="list-item" key={index} onClick={selectCategory}>
+          <li className="list-item" key={index} onClick={() => props.selectCategory(item)}>
               {item.name}
           </li>
         ))}

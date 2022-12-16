@@ -86,7 +86,7 @@ const Header: React.FC = () => {
                   </a>
                 </li>
                 <li className="nav-item nav-item-display">
-                  <NavLink className="nav-link nav-hover" to="/about">
+                  <NavLink className="nav-link nav-hover" to="/login">
                     <FontAwesomeIcon icon={faPencilAlt as IconProp} />
                     Логин/Регистрация
                   </NavLink>

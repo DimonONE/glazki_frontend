@@ -5,6 +5,7 @@ import {
   Header,
   Home,
   About,
+  Login,
   Contact,
   Items,
   Item,
@@ -40,6 +41,7 @@ export const RouterCustom: React.FC = () => {
       >
         <Routes>
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<Contact />} />
           {linkPages.map((type) => (
             <Route

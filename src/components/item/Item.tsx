@@ -45,6 +45,10 @@ const Item: React.FC = (props) => {
     },
   }));
 
+  const selectCategory = (category: any) => {
+    console.log(category);
+  };
+
   const classes = useStyles();
 
   useEffect(() => {
@@ -84,7 +88,7 @@ const Item: React.FC = (props) => {
           </div>
         </div>
         <div className="item-wrapper__categories col-sm-0 col-md-4 col-lg-3">
-          <Categories data={state.categories} />
+          <Categories selectCategory={selectCategory} data={state.categories} />
         </div>
       </div>
 

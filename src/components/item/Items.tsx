@@ -16,6 +16,7 @@ interface State {
     name: string;
     description: string;
   };
+  selectedCategory: any;
   categories: Object[];
 }
 
@@ -30,6 +31,7 @@ const Items: React.FC<IProps> = ({ type }) => {
       name: "",
       description: "",
     },
+    selectedCategory: null,
     categories: []
   });
 
@@ -44,6 +46,15 @@ const Items: React.FC<IProps> = ({ type }) => {
 
     CategoryService.getCategoriesByType(type).then((res: any) => {
       setState((prev) => ({ ...prev, categories: res.data.length ? res.data : [] }));
+      console.log()
+    });
+  };
+
+  const selectCategory = (category: any) => {
+    console.log(category);
+
+    ItemService.getItemsByCategory(category._id).then((res: any) => {
+      setState((prev) => ({ ...prev, selectedCategory: category.name, items: res.data.length ? res.data : [] }));
     });
   };
 
@@ -60,12 +71,12 @@ const Items: React.FC<IProps> = ({ type }) => {
   return (
     <div className="col d-flex">
       <div className="col-sm-12 col-md-8 col-lg-9">
-        <h1>{state.page ? state.page.name : ""}</h1>
-        <p>{state.page ? state.page.description : ""}</p>
+        <h1>{state.selectedCategory ? state.selectedCategory : (state.page ? state.page.name : "")}</h1>
+        {!state.selectedCategory ? <p>{state.page ? state.page.description : ""}</p> : null}
         {state.items.length ? <ItemList items={state.items} /> : null}
       </div>
       <div className="col-sm-0 col-md-4 col-lg-3">
-        <Categories data={state.categories} />
+        <Categories selectCategory={selectCategory} data={state.categories} />
       </div>
     </div>
   );

@@ -100,7 +100,7 @@ input#login {
     margin: 30px 5px 5px 5px;
 }
 
-input[type=text], input[type=password], .admin-content .input-field textarea, select {
+input[type=text], input[type=password], .admin-content .input-field textarea, textarea, select, input[type=text] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;

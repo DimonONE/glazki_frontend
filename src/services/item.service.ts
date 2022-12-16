@@ -25,6 +25,17 @@ const ItemService = {
       });
   },
 
+  getItemsByCategory: (id: string) => {
+    return axios
+        .get(config.api + "/api/items/category/" + id)
+        .then(function (response) {
+          return response;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  },
+
   getItem: (id: string | number) => {
     return axios
       .get(config.api + "/api/item/" + id)

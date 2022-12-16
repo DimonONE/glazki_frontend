@@ -15,6 +15,17 @@ const AuthService = {
       });
   },
 
+  signup: (user: any) => {
+    return axios
+        .post(config.api + "/api/user/signup", user)
+        .then((response) => {
+          return response;
+        })
+        .catch((error) => {
+          return error;
+        });
+  },
+
   getIP: () => {
     return axios
       .get(`https://api.ipdata.co?api-key=${config.ip_data_API_KEY}`)
